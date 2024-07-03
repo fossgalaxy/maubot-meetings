@@ -119,6 +119,14 @@ async def endmeeting(meetbot, event, meeting):
     items = await meetbot.get_items(meeting["meeting_id"])
     people_present = await meetbot.get_people_present(meeting["meeting_id"])
 
+    # ensure room alias is not None
+    if room_alias is None:
+        room_alias = "(none)"
+
+    # ensure room name is not None
+    if room_name is None:
+        room_name = "(none)"
+
     meetbot.log.info(f"Ansible: Meeting ended in {room_name} ({room_alias} / {event.room_id})")
 
     if len(items) == 0:
